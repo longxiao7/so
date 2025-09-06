@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多搜索引擎</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+        
+        .search-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .search-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .baidu {
+            color: #2932E1;
+        }
+        
+        .bing {
+            color: #00809D;
+        }
+        
+        .google {
+            color: #EA4335;
+        }
+        
+        .bilibili {
+            color: #FB7299;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .search-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #777;
+        }
+        
+        .search-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        
+        .search-btn:hover {
+            transform: scale(1.03);
+        }
+        
+        .baidu-btn {
+            background: #2932E1;
+        }
+        
+        .baidu-btn:hover {
+            background: #1A22C9;
+        }
+        
+        .bing-btn {
+            background: #00809D;
+        }
+        
+        .bing-btn:hover {
+            background: #006B84;
+        }
+        
+        .google-btn {
+            background: #EA4335;
+        }
+        
+        .google-btn:hover {
+            background: #D33426;
+        }
+        
+        .bilibili-btn {
+            background: #FB7299;
+        }
+        
+        .bilibili-btn:hover {
+            background: #E15A80;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>多搜索引擎</h1>
+        <p class="subtitle">选择一个搜索引擎开始您的查询</p>
+        
+        <div class="search-grid">
+            <!-- 百度搜索 -->
+            <div class="search-card">
+                <div class="logo baidu">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2>百度搜索</h2>
+                <form class="search-form" onsubmit="searchBaidu(event)">
+                    <input type="text" class="search-input" placeholder="输入搜索关键词" required>
+                    <button type="submit" class="search-btn baidu-btn">百度搜索</button>
+                </form>
+            </div>
+            
+            <!-- 必应搜索 -->
+            <div class="search-card">
+                <div class="logo bing">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2>必应搜索</h2>
+                <form class="search-form" onsubmit="searchBing(event)">
+                    <input type="text" class="search-input" placeholder="输入搜索关键词" required>
+                    <button type="submit" class="search-btn bing-btn">必应搜索</button>
+                </form>
+            </div>
+            
+            <!-- 谷歌搜索 -->
+            <div class="search-card">
+                <div class="logo google">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2>谷歌搜索</h2>
+                <form class="search-form" onsubmit="searchGoogle(event)">
+                    <input type="text" class="search-input" placeholder="输入搜索关键词" required>
+                    <button type="submit" class="search-btn google-btn">谷歌搜索</button>
+                </form>
+            </div>
+            
+            <!-- Bilibili搜索 -->
+            <div class="search-card">
+                <div class="logo bilibili">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2>Bilibili搜索</h2>
+                <form class="search-form" onsubmit="searchBilibili(event)">
+                    <input type="text" class="search-input" placeholder="输入搜索关键词" required>
+                    <button type="submit" class="search-btn bilibili-btn">B站搜索</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p> 多搜索引擎页面 | 选择您喜欢的搜索引擎</p>
+        </div>
+    </div>
+
+    <script>
+        // 百度搜索函数
+        function searchBaidu(event) {
+            event.preventDefault();
+            const searchQuery = event.target.querySelector('.search-input').value;
+            if (searchQuery.trim() !== '') {
+                window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(searchQuery)}`, '_blank');
+            }
+        }
+        
+        // 必应搜索函数
+        function searchBing(event) {
+            event.preventDefault();
+            const searchQuery = event.target.querySelector('.search-input').value;
+            if (searchQuery.trim() !== '') {
+                window.open(`https://www.bing.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
+            }
+        }
+        
+        // 谷歌搜索函数
+        function searchGoogle(event) {
+            event.preventDefault();
+            const searchQuery = event.target.querySelector('.search-input').value;
+            if (searchQuery.trim() !== '') {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank');
+            }
+        }
+        
+        // Bilibili搜索函数
+        function searchBilibili(event) {
+            event.preventDefault();
+            const searchQuery = event.target.querySelector('.search-input').value;
+            if (searchQuery.trim() !== '') {
+                window.open(`https://search.bilibili.com/all?keyword=${encodeURIComponent(searchQuery)}`, '_blank');
+            }
+        }
+        
+        // 为输入框添加回车键支持
+        document.querySelectorAll('.search-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.target.closest('form').dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
